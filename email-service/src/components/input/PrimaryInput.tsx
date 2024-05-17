@@ -5,6 +5,7 @@ interface PrimaryInputProps {
     name: string,
     value: string,
     label: string,
+    placeholder: string,
     onChange: ChangeEventHandler<HTMLInputElement> // para o chackra entender que é para mudar algo
 }
 
@@ -12,30 +13,30 @@ export default function PrimaryInput({
     name,
     value,
     label,
+    placeholder,
     onChange
 }: PrimaryInputProps) {
     return (
+        <>
         <Flex
         flexDirection={'column'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        mt={50}
         >
             <FormLabel
-            color={'#000'}
+            color={'#fff'}
             fontSize={'30px'}
             >{label}</FormLabel>
             <Input
                 border={'1px solid gray'}
                 fontSize={'35px'}
-                width={'400px'}
+                width={'100%'}
                 height={'50px'}
                 variant='filled'
-                placeholder='Filled'
+                placeholder={placeholder}
                 name={name}
                 value={value}
                 onChange={onChange}
             />
         </Flex>
+        </>
     )
 }
