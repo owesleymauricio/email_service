@@ -1,17 +1,28 @@
 'use client'
 import PrimaryInput from "@/components/input/PrimaryInput";
-import { Button, Flex, Text } from '@chakra-ui/react'
+import { Button, Flex, Heading, Text } from '@chakra-ui/react'
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Span } from "next/dist/trace";
+import { userIdentityMutation } from "@/hooks/userIdentityMutation";
 
 export default function Home() {
+  const { mutate, isLoading} = userIdentityMutation()
   const [email, setEmail] = useState('')
   const [firstName, setFirstName] = useState('')
   const [secondName, setSecondName] = useState('')
 
 
 
+  const submit = () => {
+    mutate({
+      firstName,
+      secondName,
+      email
+    })
+
+    
+  }
 
 
   return (
@@ -62,12 +73,14 @@ export default function Home() {
           <Button
             colorScheme='green'
             mt={'30px'}
+            onClick={submit}
           >Submit</Button>
         </Flex>
       </form>
 
 
       <Flex
+        background=' rgb(217,241,226)'
         flexDirection={'column'}
         border={'1px solid gray'}
         borderRadius={'5px'}
@@ -76,10 +89,21 @@ export default function Home() {
         height={'338px'}
         mt={50}
       >
-        <Text>
+        <Heading>
+          Assinatura mensal
+        </Heading>
+        <Text
+          color={'gray'}
+        >
           Você ira pagar:
         </Text>
-        <span>R$: 150,00</span>
+        <Text
+          fontSize={'50px'}
+          fontWeight={'bold'}
+        >
+          R$: 150,00
+        </Text>
+
       </Flex>
     </Flex>
   );
